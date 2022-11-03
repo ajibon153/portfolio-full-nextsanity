@@ -7,7 +7,7 @@ import { AiFillEye, AiFillGithub } from 'react-icons/ai';
 import { motion } from 'framer-motion';
 
 import { AppWrap, MotionWrap } from '../../layout/wrapper';
-import { urlFor, client } from '../../store/client';
+import { urlFor, client } from '../../helpers/client';
 
 import style from './Work.module.scss';
 import { LoadingRoller } from '../../components/Loading/Loading';
