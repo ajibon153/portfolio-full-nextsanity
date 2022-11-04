@@ -8,9 +8,9 @@ import { useData } from '../../helpers/api';
 const Skills = (props: any) => {
   const { IsLoading, Skills } = props;
 
-  const { data, isLoading, isFetching } = useData('skill');
+  // const { data, isLoading, isFetching } = useData('skill');
 
-  console.log('data skil', data);
+  // console.log('data skil', data);
 
   return (
     <motion.div

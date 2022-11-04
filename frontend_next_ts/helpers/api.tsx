@@ -4,14 +4,14 @@ import { useQuery } from '@tanstack/react-query';
 
 export const useData = (params: string) => {
   if (params === 'skill') return useQuery(['skill'], () => getSkillData());
+  if (params === 'skill')
+    return useQuery(['experience'], () => getExperienceSkill());
 };
 
 export const getSkillData = () => {
   const skillQuery = '*[_type == "skills"]';
 
-  client.fetch(skillQuery).then((response: any) => {
-    // console.log('response skill', response);
-
+  return client.fetch(skillQuery).then((response: any) => {
     const groupBy = response.reduce(
       (entryMap: any, e: any) =>
         entryMap.set(e.group, [...(entryMap.get(e.group) || []), e]),
@@ -37,10 +37,6 @@ export const getSkillData = () => {
     console.log('newMap', newMap);
 
     return newMap;
-
-    // setPureSkills(response);
-    // setDataSkills(newMap);
-    // setIsLoadingSkills(false);
   });
 };
 
@@ -49,8 +45,6 @@ export const getExperienceSkill = () => {
 
   // if (PureSkills.length > 0)
   client.fetch(expQuery).then((response) => {
-    console.log('response exp', response);
-
     response = response
       .map((dt: any) => {
         let start: any = new Date(dt.start);
