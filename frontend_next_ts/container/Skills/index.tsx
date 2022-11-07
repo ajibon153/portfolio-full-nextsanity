@@ -12,35 +12,16 @@ import { getExperienceSkill, getSkillData } from '../../helpers/api';
 
 const Index = (props: any) => {
   const { initialSkill } = props;
-  const { data: dataSkill, isLoading: LoadingSkills } = useQuery(
-    ['skill', ''],
-    getSkillData
-  );
-  const { data: dataExperience, isLoading: IsLoadingExperience } = useQuery(
-    ['experience'],
-    getExperienceSkill
-  );
-  // const dataExperience = useQuery(['experience'], getExperienceSkill);
 
-  // const { data } = useQuery({ queryKey: ['posts'], queryFn: getPosts, initialData: props.posts })
-
-  // const [IsLoadingExperience, setIsLoadingExperience] =
-  useState<boolean>(false);
+  const [IsLoadingExperience, setIsLoadingExperience] =
+    useState<boolean>(false);
   const [DataExperiences, setDataExperiences] = useState<any | undefined>([]);
 
   const [PureSkills, setPureSkills] = useState<any | undefined>([]);
   const [DataSkills, setDataSkills] = useState<any | undefined>([]);
-  // const [IsLoadingSkills, setIsLoadingSkills] = useState<boolean>(false);
+  const [IsLoadingSkills, setIsLoadingSkills] = useState<boolean>(false);
 
   // console.log('props', props);
-
-  useEffect(() => {
-    console.log('dataSkill', dataSkill);
-    if (dataSkill) setDataSkills(dataSkill);
-    console.log('dataExperience', dataExperience);
-
-    if (dataExperience) setDataExperiences(dataExperience);
-  }, [dataSkill, initialSkill]);
 
   // console.log('initialExperience', initialExperience);
 
@@ -62,7 +43,7 @@ const Index = (props: any) => {
       <h2 className='head-text'>Skills & Experience</h2>
 
       <div className={style.app__skills_container}>
-        <Skills IsLoading={LoadingSkills} Skills={DataSkills} />
+        <Skills IsLoading={IsLoadingSkills} Skills={DataSkills} />
         <Experience
           IsLoading={IsLoadingExperience}
           Experiences={DataExperiences}

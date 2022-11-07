@@ -4,9 +4,13 @@
 /node_modules
 /backend_sanity/node_modules
 /frontend_next_ts/node_modules
+/frontend_next_ts/package-lock.json
 **/node_modules
 **node_modules
 **/.next
+**/**/package-lock.json
+***/package-lock.json
+*package-lock.json
 
 /.pnp
 .pnp.js
