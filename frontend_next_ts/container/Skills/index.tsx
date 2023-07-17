@@ -9,9 +9,10 @@ import style from './Skills.module.scss';
 import Experience from './Experience';
 import Skills from './Skills';
 import { getExperienceSkill, getSkillData } from '../../helpers/api';
+import { log } from 'console';
 
 const Index = (props: any) => {
-  const { initialSkill } = props;
+  // const { initialSkill, initialExperience } = props;
 
   const [IsLoadingExperience, setIsLoadingExperience] =
     useState<boolean>(false);
@@ -25,18 +26,20 @@ const Index = (props: any) => {
 
   // console.log('initialExperience', initialExperience);
 
-  // useEffect(() => {
-  //   async function loadData() {
-  //     let skill = await getSkillData();
-  //     setDataSkills(skill);
-  //     // setIsLoadingExperience(false);
+  useEffect(() => {
+    async function loadData() {
+      let skill = await getSkillData();
+      setDataSkills(skill);
+      // setIsLoadingExperience(false);
 
-  //     let experience = await getExperienceSkill();
-  //     setDataExperiences(experience);
-  //     // setIsLoadingSkills(false);
-  //   }
-  //   // loadData();
-  // }, []);
+      let experience = await getExperienceSkill();
+      console.log('experience', experience);
+
+      setDataExperiences(experience);
+      // setIsLoadingSkills(false);
+    }
+    loadData();
+  }, []);
 
   return (
     <div id='skills' className='app__flex'>
@@ -47,6 +50,7 @@ const Index = (props: any) => {
         <Experience
           IsLoading={IsLoadingExperience}
           Experiences={DataExperiences}
+          Skills={DataSkills}
         />
       </div>
     </div>
@@ -62,20 +66,25 @@ const Index = (props: any) => {
 //   };
 // }
 
-export async function getStaticProps() {
-  const queryClient = new QueryClient();
+// export async function getStaticProps() {
+//   const queryClient = new QueryClient();
 
-  // let initialSkill = await getSkillData();
-  // console.log('initialSkill', initialSkill);
+//   // let initialSkill = await getSkillData();
+//   // let initialExperience = await getExperienceSkill();
+//   // console.log('initialSkill', initialSkill);
 
-  let initialSkill = await queryClient.prefetchQuery(['skill'], getSkillData);
-  return {
-    props: {
-      initialSkill,
-      // initialExperience,
-    },
-  };
-}
+//   let initialExperience = await queryClient.prefetchQuery(
+//     ['skill'],
+//     getExperienceSkill
+//   );
+//   let initialSkill = await queryClient.prefetchQuery(['skill'], getSkillData);
+//   return {
+//     props: {
+//       initialSkill,
+//       initialExperience,
+//     },
+//   };
+// }
 
 // export default AppWrap(Skill, 'skills');
 export default AppWrap(

@@ -1,4 +1,6 @@
 Backend using sanity.io
+instal sanity cli : npm install --global sanity@latest
+run : npm sanity start
 
 Frontend using Next.js, Typescript, Scss
 llibrary : @sanity/client @sanity/image-url framer-motion sass node-sass react-icons

@@ -10,7 +10,7 @@ const Skills = (props: any) => {
 
   // const { data, isLoading, isFetching } = useData('skill');
 
-  // console.log('data skil', data);
+  console.log('data skil', Skills);
 
   return (
     <motion.div
@@ -24,28 +24,29 @@ const Skills = (props: any) => {
         <LoadingRoller />
       ) : (
         <>
-          {Skills.map((skills: any, i: number) => (
-            <div
-              className=''
-              style={{ width: '100%', margin: '2rem 0' }}
-              key={skills.groupName + i}
-            >
-              <h4 className='bold-text' style={{ margin: '1rem' }}>
-                {capitalizeFirstLetter(skills.groupName)}
-              </h4>
-              <div className={`app__flex ${style.app__skill_group}`}>
-                {skills.value.map((skill: any, i: number) => {
-                  if (!skill.hidden)
-                    return (
-                      <SkillIcon
-                        key={skills.groupName + skill.name + i}
-                        skill={skill}
-                      />
-                    );
-                })}
+          {Skills.groupSkill &&
+            Skills.groupSkill.map((skills: any, i: number) => (
+              <div
+                className=''
+                style={{ width: '100%', margin: '2rem 0' }}
+                key={skills.groupName + i}
+              >
+                <h4 className='bold-text' style={{ margin: '1rem' }}>
+                  {capitalizeFirstLetter(skills.groupName)}
+                </h4>
+                <div className={`app__flex ${style.app__skill_group}`}>
+                  {skills.value.map((skill: any, i: number) => {
+                    if (!skill.hidden)
+                      return (
+                        <SkillIcon
+                          key={skills.groupName + skill.name + i}
+                          skill={skill}
+                        />
+                      );
+                  })}
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
         </>
       )}
     </motion.div>

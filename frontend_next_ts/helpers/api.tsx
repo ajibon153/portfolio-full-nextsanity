@@ -12,6 +12,8 @@ export const getSkillData = () => {
   const skillQuery = '*[_type == "skills"]';
 
   return client.fetch(skillQuery).then((response: any) => {
+    // console.log('response skill', response);
+
     const groupBy = response.reduce(
       (entryMap: any, e: any) =>
         entryMap.set(e.group, [...(entryMap.get(e.group) || []), e]),
@@ -34,9 +36,9 @@ export const getSkillData = () => {
       })
       .sort((a, b) => a.id - b.id);
 
-    console.log('newMap', newMap);
+    // console.log('newMap', newMap);
 
-    return newMap;
+    return { groupSkill: newMap, pureSkill: response };
   });
 };
 
@@ -44,7 +46,9 @@ export const getExperienceSkill = () => {
   const expQuery = '*[_type == "workExperience"]';
 
   // if (PureSkills.length > 0)
-  client.fetch(expQuery).then((response) => {
+  return client.fetch(expQuery).then((response) => {
+    console.log('response exp', response);
+
     response = response
       .map((dt: any) => {
         let start: any = new Date(dt.start);
@@ -65,7 +69,7 @@ export const getExperienceSkill = () => {
         start = dateToIndonesia(start);
         let end = dt.end ? dateToIndonesia(dt.end) : null;
 
-        let skills: any = [];
+        // let skills: any = [];
         // skills = dt.skills
         //   ? dt.skills.map((skill: any) => {
         //       return PureSkills.find(
@@ -74,7 +78,7 @@ export const getExperienceSkill = () => {
         //     })
         //   : [];
 
-        return { ...dt, skills, present, start, end, end_date, experience };
+        return { ...dt, present, start, end, end_date, experience };
       })
       .reduce(
         (entryMap: any, e: any) =>
@@ -84,6 +88,8 @@ export const getExperienceSkill = () => {
           ]),
         new Map()
       );
+
+    // console.log('response exp 2', response);
 
     let mapped = [...response]
       .map((res) => {
@@ -95,8 +101,8 @@ export const getExperienceSkill = () => {
           })),
         };
       })
-
       .sort((a: any, b: any) => b.years - a.years);
+    // console.log('response exp 3', mapped);
 
     return mapped;
     // setDataExperiences(mapped);

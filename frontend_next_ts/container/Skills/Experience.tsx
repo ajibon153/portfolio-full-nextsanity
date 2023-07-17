@@ -5,12 +5,15 @@ import style from './Skills.module.scss';
 import swal from '@sweetalert/with-react';
 import { SkillIcon } from './Skills';
 import { urlFor } from '../../helpers/client';
+import { log } from 'console';
 
 // import { capitalizeFirstLetter } from '../../utility/text';
 // import { dateToIndonesia } from '../../utility/dateParse';
 
 const Experience = (props: any) => {
-  const { IsLoading, Experiences } = props;
+  const { IsLoading, Experiences, Skills } = props;
+  console.log('Experiences', Experiences);
+  console.log('Skills', Skills);
 
   const HandlePopUp = (exp: any) => {
     console.log('exp', exp);
@@ -46,16 +49,22 @@ const Experience = (props: any) => {
             <h4>Tech</h4>
             <div className='app__flex flex__row'>
               {exp.skills.map((skill: any) => {
+                let foundSkill = Skills.pureSkill.find(
+                  (pure: any) => pure._id === skill._ref
+                );
+
                 return (
                   <div className={` app__flex ${style.app__skill_tech}`}>
                     <div className={`app__flex `}>
                       <img
-                        src={urlFor(skill.icon)}
-                        alt={skill.name}
+                        src={urlFor(foundSkill.icon)}
+                        alt={foundSkill.name}
                         width={30}
                       />
                     </div>
-                    <p className='p-text'>{skill.name}</p>
+                    <p className='p-text' style={{ textAlign: 'center' }}>
+                      {foundSkill.name}
+                    </p>
                   </div>
                 );
                 // <SkillIcon skill={skill} />
@@ -76,64 +85,68 @@ const Experience = (props: any) => {
         <LoadingRoller />
       ) : (
         <>
-          {Experiences.map((experience: any, i: number) => (
-            <motion.div
-              className={style.app__skills_exp_item}
-              key={'exp' + experience.years + '_' + 1}
-              whileInView={{
-                opacity: [0, 1],
-              }}
-              transition={{
-                duration: 0.8,
-              }}
-            >
-              <div
-                className={style.app__skills_exp_year}
-                style={{ marginTop: '1rem' }}
-              >
-                <p className='bold-text'>{experience.years}</p>
-              </div>
-              <div
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  width: '100%',
-                }}
-              >
-                {experience.works.map((work: any) => (
+          {Experiences
+            ? Experiences.map((experience: any, i: number) => (
+                <motion.div
+                  className={style.app__skills_exp_item}
+                  key={'exp' + experience.years + '_' + 1}
+                  whileInView={{
+                    opacity: [0, 1],
+                  }}
+                  transition={{
+                    duration: 0.8,
+                  }}
+                >
                   <div
-                    key={work.company}
+                    className={style.app__skills_exp_year}
+                    style={{ marginTop: '1rem' }}
+                  >
+                    <p className='bold-text'>{experience.years}</p>
+                  </div>
+                  <div
                     style={{
                       display: 'flex',
-                      justifyContent: 'space-between',
-                      marginTop: '1rem',
+                      flexDirection: 'column',
+                      width: '100%',
                     }}
                   >
-                    <motion.div className={style.app__skills_exp_works}>
-                      <motion.div
-                        className={style.app__skills_exp_work}
-                        data-tip
-                        data-for={work.name}
+                    {experience.works.map((work: any) => (
+                      <div
+                        key={work.company}
+                        style={{
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                          marginTop: '1rem',
+                        }}
                       >
-                        <h4 className='bold-text'>{work.company}</h4>
-                        <p
-                          className='p-text'
-                          style={{
-                            fontWeight: 600,
-                          }}
-                        >
-                          {work.name}
-                        </p>
-                      </motion.div>
-                      <div className={style.app__experience_detail}>
-                        <MdOutlineOpenInNew onClick={() => HandlePopUp(work)} />
+                        <motion.div className={style.app__skills_exp_works}>
+                          <motion.div
+                            className={style.app__skills_exp_work}
+                            data-tip
+                            data-for={work.name}
+                          >
+                            <h4 className='bold-text'>{work.company}</h4>
+                            <p
+                              className='p-text'
+                              style={{
+                                fontWeight: 600,
+                              }}
+                            >
+                              {work.name}
+                            </p>
+                          </motion.div>
+                          <div className={style.app__experience_detail}>
+                            <MdOutlineOpenInNew
+                              onClick={() => HandlePopUp(work)}
+                            />
+                          </div>
+                        </motion.div>
                       </div>
-                    </motion.div>
+                    ))}
                   </div>
-                ))}
-              </div>
-            </motion.div>
-          ))}
+                </motion.div>
+              ))
+            : null}
         </>
       )}
     </div>
