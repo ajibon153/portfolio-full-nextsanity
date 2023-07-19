@@ -5,18 +5,18 @@ import style from './Skills.module.scss';
 import swal from '@sweetalert/with-react';
 import { SkillIcon } from './Skills';
 import { urlFor } from '../../helpers/client';
-import { log } from 'console';
 
 // import { capitalizeFirstLetter } from '../../utility/text';
 // import { dateToIndonesia } from '../../utility/dateParse';
 
 const Experience = (props: any) => {
-  const { IsLoading, Experiences, Skills } = props;
-  console.log('Experiences', Experiences);
-  console.log('Skills', Skills);
+  const { IsLoading, Experiences, Skills, toggle } = props;
+  // console.log('toggl exp', toggle);
+  // console.log('Experiences', Experiences);
+  // console.log('Skills', Skills);
 
   const HandlePopUp = (exp: any) => {
-    console.log('exp', exp);
+    // console.log('exp', exp);
 
     swal({
       buttons: false,
@@ -46,7 +46,7 @@ const Experience = (props: any) => {
             </ul>
           </div>
           <div className={style.app__skills_exp_pop_div}>
-            <h4>Tech</h4>
+            <h4>Skill</h4>
             <div className='app__flex flex__row'>
               {exp.skills.map((skill: any) => {
                 let foundSkill = Skills.pureSkill.find(
@@ -137,7 +137,8 @@ const Experience = (props: any) => {
                           </motion.div>
                           <div className={style.app__experience_detail}>
                             <MdOutlineOpenInNew
-                              onClick={() => HandlePopUp(work)}
+                              onClick={() => toggle()}
+                              // HandlePopUp(work)
                             />
                           </div>
                         </motion.div>

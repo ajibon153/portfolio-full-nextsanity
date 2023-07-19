@@ -1,14 +1,8 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import style from './About.module.scss';
-// import { images } from '../../constants';
-import Image from 'next/future/image';
 
-import {
-  AppWrap,
-  MotionWrap,
-  // MotionWrap
-} from '../../layout/wrapper';
+import { AppWrap, MotionWrap } from '../../layout/wrapper';
 import { urlFor, client } from '../../helpers/client';
 import { LoadingRoller } from '../../components/Loading/Loading';
 

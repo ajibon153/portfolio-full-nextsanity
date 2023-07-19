@@ -12,7 +12,8 @@ import { getExperienceSkill, getSkillData } from '../../helpers/api';
 import { log } from 'console';
 
 const Index = (props: any) => {
-  // const { initialSkill, initialExperience } = props;
+  const { toggle } = props;
+  // console.log('props', props);
 
   const [IsLoadingExperience, setIsLoadingExperience] =
     useState<boolean>(false);
@@ -33,7 +34,7 @@ const Index = (props: any) => {
       // setIsLoadingExperience(false);
 
       let experience = await getExperienceSkill();
-      console.log('experience', experience);
+      // console.log('experience', experience);
 
       setDataExperiences(experience);
       // setIsLoadingSkills(false);
@@ -51,6 +52,7 @@ const Index = (props: any) => {
           IsLoading={IsLoadingExperience}
           Experiences={DataExperiences}
           Skills={DataSkills}
+          toggle={toggle}
         />
       </div>
     </div>

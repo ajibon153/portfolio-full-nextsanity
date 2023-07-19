@@ -47,7 +47,7 @@ export const getExperienceSkill = () => {
 
   // if (PureSkills.length > 0)
   return client.fetch(expQuery).then((response) => {
-    console.log('response exp', response);
+    // console.log('response exp', response);
 
     response = response
       .map((dt: any) => {

@@ -1,6 +1,4 @@
 import { useEffect, useState } from 'react';
-
-import Image from 'next/future/image';
 import Link from 'next/link';
 
 import { AiFillEye, AiFillGithub } from 'react-icons/ai';
@@ -22,7 +20,7 @@ const Work = () => {
   useEffect(() => {
     const query = '*[_type == "works"]';
     client.fetch(query).then((data) => {
-      console.log('data', data);
+      // console.log('data', data);
 
       setWorks(data);
       setFilterWork(data);
@@ -87,7 +85,7 @@ const Work = () => {
                   className={`app__flex ${style.app__work_item}`}
                 >
                   <div className={`app__flex ${style.app__work_img}`}>
-                    <Image src={urlFor(work.imgUrl)} alt={work.title} />
+                    <img src={urlFor(work.imgUrl)} alt={work.title} />
                     <motion.div
                       whileHover={{ opacity: [0, 1] }}
                       transition={{
@@ -142,11 +140,12 @@ const Work = () => {
                   </div>
                   <div className={`app__flex ${style.app__work_content}`}>
                     <h4 className='bold-text'>{work.title}</h4>
-                    <p className='p-text'>{work.description}</p>`
-                    <div className={`app__flex ${style.app__work_tag}`}>
-                      <p className='p-text'>{work.tags[0]}</p>
-                    </div>
-                    `
+                    <p className='p-text'>{work.description}</p>
+                    {work.tags && (
+                      <div className={`app__flex ${style.app__work_tag}`}>
+                        <p className='p-text'>{work.tags[0]}</p>
+                      </div>
+                    )}
                   </div>
                 </div>
               ))}

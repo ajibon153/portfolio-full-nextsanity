@@ -10,7 +10,7 @@ const Skills = (props: any) => {
 
   // const { data, isLoading, isFetching } = useData('skill');
 
-  console.log('data skil', Skills);
+  // console.log('data skil', Skills);
 
   return (
     <motion.div
