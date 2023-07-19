@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
-
+import React from 'react';
 import styles from '../styles/Home.module.scss';
-import { motion, useCycle } from 'framer-motion';
+import { motion, useCycle, AnimatePresence } from 'framer-motion';
 
 import { About, Footer, Header, Skills, Testimonial, Work } from '../container';
 import { Navbar } from '../components';
@@ -9,9 +9,12 @@ import { NavigationDots, SocialMedia } from '../components';
 import { useRef } from 'react';
 import { dehydrate, QueryClient } from '@tanstack/react-query';
 import { getSkillData } from '../helpers/api';
-import { useDimensions } from '../components/Screen/use-dimensions';
+// import { useDimensions } from '../components/Screen/use-dimensions';
 import DetailExperience from '../container/Skills/DetailExperience';
 import { MenuToggle } from '../components/Screen/MenuToggle';
+import SideScreen from '../components/Screen/SideScreen';
+import Sidebar from '../components/Screen/Sidebar';
+import { useDimensions } from '../components/Screen/use-dimensions';
 
 const sidebar = {
   open: (height = 1000) => ({
@@ -34,37 +37,51 @@ const sidebar = {
 };
 
 const Home: NextPage = () => {
-  const [isOpen, toggleOpen] = useCycle(false, true);
+  const [open, toggleOpen] = useCycle(false, true);
+  const [sideBar, setSideBar] = React.useState(false);
+  const [sideBarData, setSideBarData] = React.useState({});
   const containerRef = useRef(null);
-  const { height } = useDimensions(containerRef);
+  const { height, width } = useDimensions(containerRef);
+
+  const handleHideSidebar = () => {
+    setSideBar(false);
+    document.body.style.overflow = 'scroll';
+  };
 
   return (
     <>
+      {/* <main style={{ display: 'flex' }}>
+        <AnimatePresence>
+          {open && <SideScreen toggle={toggleOpen} />}
+        </AnimatePresence>
+      </main> */}
+      <Sidebar
+        sideBar={sideBar}
+        setSideBar={handleHideSidebar}
+        data={sideBarData}
+        width={width}
+      />
       <SocialMedia />
-      <div className={styles.app}>
+      <main
+        className={styles.app}
+        ref={containerRef}
+        style={{ overflowX: sideBar ? 'hidden' : 'scroll' }}
+      >
         <Navbar />
         <Header />
         <About />
         <Skills
-          toggle={() => {
+          toggle={(data: any) => {
             console.log('open sidew');
-            toggleOpen();
+            setSideBar(true);
+            setSideBarData(data);
+            document.body.style.overflow = 'hidden';
           }}
         />
-        <motion.nav
-          initial={false}
-          animate={isOpen ? 'open' : 'closed'}
-          custom={height}
-          ref={containerRef}
-        >
-          <motion.div className='background' variants={sidebar} />
-          <DetailExperience />
-          <MenuToggle toggle={() => toggleOpen()} />
-        </motion.nav>
         <Work />
         <Testimonial />
         <Footer />
-      </div>
+      </main>
       <NavigationDots />
       <div className='copyright'>
         <p className='p-text'>@2022 Aji</p>

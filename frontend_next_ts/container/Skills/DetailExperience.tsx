@@ -4,6 +4,7 @@ import { urlFor } from '../../helpers/client';
 
 export default function DetailExperience(props: any) {
   const { exp, Skills } = props;
+
   if (!exp) return;
   return (
     <div className={style.app__skills_exp_pop}>

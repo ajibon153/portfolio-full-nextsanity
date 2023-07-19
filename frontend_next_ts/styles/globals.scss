@@ -124,7 +124,6 @@ a {
     font-size: 1.75rem;
   }
 }
-
 .bold-text {
   font-size: 1rem;
   font-weight: 800;
@@ -232,6 +231,11 @@ a {
 }
 .app__navigation_dot.active {
   background-color: #313bac;
+}
+
+.swal-overlay--show-modal .swal-modal {
+  // width: 80%;
+  // min-width: 300px;
 }
 
 @media screen and (max-width: 500px) {
