@@ -11,17 +11,20 @@ import PopExperience from './popExperience';
 // import { dateToIndonesia } from '../../utility/dateParse';
 
 const Experience = (props: any) => {
-  const { IsLoading, Experiences, Skills, toggle } = props;
+  const { IsLoading, Experiences, Skills, toggle, Portfolio } = props;
   // console.log('toggl exp', toggle);
   // console.log('Experiences', Experiences);
   // console.log('Skills', Skills);
+  console.log('porto Experience', Portfolio);
 
   const HandlePopUp = (exp: any) => {
     // console.log('exp', exp);
 
     swal({
       buttons: false,
-      content: <PopExperience Skills={Skills} exp={exp} />,
+      content: (
+        <PopExperience Skills={Skills} exp={exp} Portfolio={Portfolio} />
+      ),
     });
   };
 
@@ -87,7 +90,7 @@ const Experience = (props: any) => {
                           <div className={style.app__experience_detail}>
                             <MdOutlineOpenInNew
                               onClick={() => {
-                                toggle({ exp: work, Skills });
+                                toggle({ exp: work, Skills, Portfolio });
                                 // HandlePopUp(work);
                               }}
                             />

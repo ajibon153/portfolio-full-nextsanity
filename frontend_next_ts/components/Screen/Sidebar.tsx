@@ -59,8 +59,8 @@ function Sidebar({
                 top: 0,
                 right: 0,
                 width: width < 500 ? '100%' : '85%',
-                padding: '3%',
-                paddingRight: 0,
+                // padding: '3%',
+                // paddingRight: 0,
                 height: '100vh',
               }}
             >
@@ -83,7 +83,11 @@ function Sidebar({
               >
                 &times;
               </button>
-              <PopExperience exp={data.exp} Skills={data.Skills} />
+              <PopExperience
+                exp={data.exp}
+                Skills={data.Skills}
+                Portfolio={data.Portfolio}
+              />
             </motion.div>
           </motion.div>
           <motion.div

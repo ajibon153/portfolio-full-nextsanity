@@ -33,11 +33,15 @@ const liVariants = {
 };
 
 function PopExperience(props: any) {
-  const { exp, Skills } = props;
+  const { exp, Skills, Portfolio } = props;
+
   return (
     <AnimatePresence>
       <>
-        <div className={style.app__skills_exp_pop}>
+        <div
+          className={style.app__skills_exp_pop}
+          style={{ padding: 35, paddingBottom: 100, overflowY: 'scroll' }}
+        >
           <div className={style.app__skills_exp_pop_div}>
             <h3>{exp.company}</h3>
           </div>
@@ -101,6 +105,32 @@ function PopExperience(props: any) {
                     </div>
                     <p className='p-text' style={{ textAlign: 'center' }}>
                       {foundSkill.name}
+                    </p>
+                  </div>
+                );
+                // <SkillIcon skill={skill} />
+              })}
+            </div>
+          </div>
+          <div className={style.app__skills_exp_pop_div}>
+            <h4>Portfolio</h4>
+            <div className='app__flex flex__row'>
+              {exp.portfolio.map((portofolio: any) => {
+                let foundPortofolio = Portfolio.find(
+                  (pure: any) => pure._id === portofolio._ref
+                );
+
+                return (
+                  <div className={` app__flex ${style.app__Portofolio_tech}`}>
+                    <div className={`app__flex `}>
+                      <img
+                        src={urlFor(foundPortofolio.imgUrl)}
+                        alt={foundPortofolio.name}
+                        width={30}
+                      />
+                    </div>
+                    <p className='p-text' style={{ textAlign: 'center' }}>
+                      {foundPortofolio.title}
                     </p>
                   </div>
                 );

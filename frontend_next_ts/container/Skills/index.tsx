@@ -12,7 +12,7 @@ import { getExperienceSkill, getSkillData } from '../../helpers/api';
 import { log } from 'console';
 
 const Index = (props: any) => {
-  const { toggle } = props;
+  const { toggle, Portfolio } = props;
   // console.log('props', props);
 
   const [IsLoadingExperience, setIsLoadingExperience] =
@@ -22,6 +22,7 @@ const Index = (props: any) => {
   const [PureSkills, setPureSkills] = useState<any | undefined>([]);
   const [DataSkills, setDataSkills] = useState<any | undefined>([]);
   const [IsLoadingSkills, setIsLoadingSkills] = useState<boolean>(false);
+  console.log('porto index exp', Portfolio);
 
   // console.log('props', props);
 
@@ -53,6 +54,7 @@ const Index = (props: any) => {
           Experiences={DataExperiences}
           Skills={DataSkills}
           toggle={toggle}
+          Portfolio={Portfolio}
         />
       </div>
     </div>

@@ -40,6 +40,7 @@ const Home: NextPage = () => {
   const [open, toggleOpen] = useCycle(false, true);
   const [sideBar, setSideBar] = React.useState(false);
   const [sideBarData, setSideBarData] = React.useState({});
+  const [Portfolio, setPortfolio] = React.useState([]);
   const containerRef = useRef(null);
   const { height, width } = useDimensions(containerRef);
 
@@ -72,13 +73,14 @@ const Home: NextPage = () => {
         <About />
         <Skills
           toggle={(data: any) => {
-            console.log('open sidew');
+            console.log('open sidew', data);
             setSideBar(true);
             setSideBarData(data);
             document.body.style.overflow = 'hidden';
           }}
+          Portfolio={Portfolio}
         />
-        <Work />
+        <Work setPortfolio={setPortfolio} />
         <Testimonial />
         <Footer />
       </main>

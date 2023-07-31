@@ -9,19 +9,22 @@ import { urlFor, client } from '../../helpers/client';
 
 import style from './Work.module.scss';
 import { LoadingRoller } from '../../components/Loading/Loading';
+import WorkItem from './WorkItem';
 
-const Work = () => {
+const Work = (props: any) => {
   const [ActiveFilter, setActiveFilter] = useState<string>('All');
   const [AnimateCard, setAnimateCard] = useState<any>({ y: 0, opacity: 1 });
   const [Works, setWorks] = useState<any | undefined>();
   const [FilterWork, setFilterWork] = useState<any | undefined>();
   const [LoadingPortfolio, setLoadingPortfolio] = useState<boolean>(true);
 
+  const { setPortfolio } = props;
+
   useEffect(() => {
     const query = '*[_type == "works"]';
     client.fetch(query).then((data) => {
-      // console.log('data', data);
-
+      console.log('data work', data);
+      setPortfolio(data);
       setWorks(data);
       setFilterWork(data);
       setLoadingPortfolio(false);
@@ -80,74 +83,8 @@ const Work = () => {
               }}
             >
               {FilterWork.map((work: any, i: number) => (
-                <div
-                  key={work.title + i}
-                  className={`app__flex ${style.app__work_item}`}
-                >
-                  <div className={`app__flex ${style.app__work_img}`}>
-                    <img src={urlFor(work.imgUrl)} alt={work.title} />
-                    <motion.div
-                      whileHover={{ opacity: [0, 1] }}
-                      transition={{
-                        duration: 0.25,
-                        ease: 'easeInOut',
-                        staggerChildren: 0,
-                      }}
-                      className={`app__flex flex__row ${style.app__work_hover}`}
-                    >
-                      {work.projectLink && (
-                        <Link href={work.projectLink} passHref>
-                          <a target='_blank'>
-                            <motion.div
-                              whileHover={{
-                                opacity: [0.3, 1],
-                              }}
-                              transition={{
-                                duration: 0.1,
-                                ease: 'easeInOut',
-                                // staggerChildren: 0,
-                              }}
-                              className={`app__flex`}
-                            >
-                              <AiFillEye />
-                            </motion.div>
-                          </a>
-                        </Link>
-                      )}
-                      {work.codeLink && (
-                        <Link href={work.codeLink} passHref>
-                          <a target='_blank'>
-                            <motion.div
-                              whileInView={{
-                                scale: [0.3, 1],
-                              }}
-                              whileHover={{
-                                opacity: [0.3, 1],
-                              }}
-                              transition={{
-                                duration: 0.1,
-                                ease: 'easeInOut',
-                                // staggerChildren: 0,
-                              }}
-                              className={`app__flex`}
-                            >
-                              <AiFillGithub />
-                            </motion.div>
-                          </a>
-                        </Link>
-                      )}
-                    </motion.div>
-                  </div>
-                  <div className={`app__flex ${style.app__work_content}`}>
-                    <h4 className='bold-text'>{work.title}</h4>
-                    <p className='p-text'>{work.description}</p>
-                    {work.tags && (
-                      <div className={`app__flex ${style.app__work_tag}`}>
-                        <p className='p-text'>{work.tags[0]}</p>
-                      </div>
-                    )}
-                  </div>
-                </div>
+                <WorkItem
+                />
               ))}
             </motion.div>
           )}
