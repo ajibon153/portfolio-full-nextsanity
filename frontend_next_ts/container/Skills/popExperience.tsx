@@ -5,6 +5,9 @@ import style from './Skills.module.scss';
 import { motion, AnimatePresence } from 'framer-motion';
 import { SkillIcon } from './Skills';
 import { urlFor } from '../../helpers/client';
+import WorkItem from '../Work/WorkItem';
+import { log } from 'console';
+import WorkPop from '../Work/WorkPop';
 
 const ulVariants = {
   open: {
@@ -35,6 +38,8 @@ const liVariants = {
 function PopExperience(props: any) {
   const { exp, Skills, Portfolio } = props;
 
+  const [PopImage, setPopImage] = React.useState<boolean>(null);
+  const [isOpen, setIsOpen] = React.useState<boolean>(false);
   return (
     <AnimatePresence>
       <>
@@ -71,7 +76,7 @@ function PopExperience(props: any) {
                 },
               }}
             >
-              {exp.description.map((jobdesk: any) => {
+              {exp.description?.map((jobdesk: any) => {
                 if (jobdesk !== '')
                   return (
                     <motion.li
@@ -89,7 +94,7 @@ function PopExperience(props: any) {
           <div className={style.app__skills_exp_pop_div}>
             <h4>Skill</h4>
             <div className='app__flex flex__row'>
-              {exp.skills.map((skill: any) => {
+              {exp?.skills?.map((skill: any) => {
                 let foundSkill = Skills.pureSkill.find(
                   (pure: any) => pure._id === skill._ref
                 );
@@ -115,31 +120,30 @@ function PopExperience(props: any) {
           <div className={style.app__skills_exp_pop_div}>
             <h4>Portfolio</h4>
             <div className='app__flex flex__row'>
-              {exp.portfolio.map((portofolio: any) => {
+              {exp?.portfolio?.map((portofolio: any, i: number) => {
                 let foundPortofolio = Portfolio.find(
                   (pure: any) => pure._id === portofolio._ref
                 );
-
                 return (
-                  <div className={` app__flex ${style.app__Portofolio_tech}`}>
-                    <div className={`app__flex `}>
-                      <img
-                        src={urlFor(foundPortofolio.imgUrl)}
-                        alt={foundPortofolio.name}
-                        width={30}
-                      />
-                    </div>
-                    <p className='p-text' style={{ textAlign: 'center' }}>
-                      {foundPortofolio.title}
-                    </p>
-                  </div>
+                  <WorkItem
+                    work={foundPortofolio}
+                    setIsOpen={setIsOpen}
+                    setPopImage={setPopImage}
+                    index={i}
+                  />
                 );
-                // <SkillIcon skill={skill} />
               })}
             </div>
           </div>
         </div>
       </>
+
+      <WorkPop
+        isOpen={isOpen}
+        PopImage={PopImage}
+        setPopImage={setPopImage}
+        setIsOpen={setIsOpen}
+      />
     </AnimatePresence>
   );
 }

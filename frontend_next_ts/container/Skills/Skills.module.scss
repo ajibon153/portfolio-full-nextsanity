@@ -176,7 +176,7 @@
   }
 
   div {
-    width: 96%;
+    width: 100%;
     text-align: left;
   }
 
@@ -220,6 +220,21 @@
     border-radius: 50%;
     width: 50px !important;
     height: 50px !important;
+  }
+  p {
+    font-size: 12px;
+    margin-top: 5px;
+  }
+}
+
+.app__Portofolio_tech {
+  width: auto !important;
+  margin: 10px;
+  div {
+    box-shadow: 3px 3px 6px rgb(0 0 0 / 20%);
+    border-radius: 50%;
+    // width: 50px !important;
+    // height: 50px !important;
   }
   p {
     font-size: 12px;

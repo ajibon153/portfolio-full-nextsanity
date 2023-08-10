@@ -3,6 +3,8 @@ import React from 'react';
 import styles from '../styles/Home.module.scss';
 import { motion, useCycle, AnimatePresence } from 'framer-motion';
 
+import 'react-image-lightbox/style.css';
+
 import { About, Footer, Header, Skills, Testimonial, Work } from '../container';
 import { Navbar } from '../components';
 import { NavigationDots, SocialMedia } from '../components';
@@ -81,14 +83,10 @@ const Home: NextPage = () => {
           Portfolio={Portfolio}
         />
         <Work setPortfolio={setPortfolio} />
-        <Testimonial />
+        {/* <Testimonial /> */}
         <Footer />
       </main>
       <NavigationDots />
-      <div className='copyright'>
-        <p className='p-text'>@2022 Aji</p>
-        <p className='p-text'>All rights reserved</p>
-      </div>
     </>
   );
 };

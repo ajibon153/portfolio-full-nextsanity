@@ -10,6 +10,7 @@ import { urlFor, client } from '../../helpers/client';
 import style from './Work.module.scss';
 import { LoadingRoller } from '../../components/Loading/Loading';
 import WorkItem from './WorkItem';
+import WorkPop from './WorkPop';
 
 const Work = (props: any) => {
   const [ActiveFilter, setActiveFilter] = useState<string>('All');
@@ -17,6 +18,9 @@ const Work = (props: any) => {
   const [Works, setWorks] = useState<any | undefined>();
   const [FilterWork, setFilterWork] = useState<any | undefined>();
   const [LoadingPortfolio, setLoadingPortfolio] = useState<boolean>(true);
+  const [PopImage, setPopImage] = useState<boolean>(null);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [Change, setChange] = useState<boolean>(false);
 
   const { setPortfolio } = props;
 
@@ -31,17 +35,23 @@ const Work = (props: any) => {
     });
   }, []);
 
-  const handleWorkFilter = (item: string) => {
+  const handleWorkFilter = async (item: string) => {
     setActiveFilter(item);
-    setAnimateCard([{ y: 100, opacity: 0 }]);
+    setChange(true);
+    setAnimateCard({ y: 100, opacity: 0 });
+    // await setTimeout(() => {
+    setLoadingPortfolio(true);
+    // }, 100);
 
     setTimeout(() => {
-      setAnimateCard([{ y: 0, opacity: 1 }]);
+      setAnimateCard({ y: 0, opacity: 1 });
       if (item === 'All') {
         setFilterWork(Works);
       } else {
-        setFilterWork(Works.filter((work: any) => work.tags.includes(item)));
+        setFilterWork(Works.filter((work: any) => work?.tags?.includes(item)));
       }
+      setLoadingPortfolio(false);
+      setChange(true);
     }, 500);
   };
 
@@ -51,21 +61,21 @@ const Work = (props: any) => {
         My Creative <span>Portfolio</span>
       </h2>
       <div className={style.app__work_filter}>
-        {!LoadingPortfolio && (
-          <>
-            {['All', 'UI/UX', 'Web App', 'React'].map((work) => (
-              <div
-                key={work}
-                className={`app__flex p-text ${style.app__work_filter_item} ${
-                  ActiveFilter === work ? style.item_active : ''
-                }`}
-                onClick={() => handleWorkFilter(work)}
-              >
-                {work}
-              </div>
-            ))}
-          </>
-        )}
+        {/* {!LoadingPortfolio && ( */}
+        <>
+          {['All', 'React', 'Design', 'Mobile', 'Other'].map((work) => (
+            <div
+              key={work}
+              className={`app__flex p-text ${style.app__work_filter_item} ${
+                ActiveFilter === work ? style.item_active : ''
+              }`}
+              onClick={() => handleWorkFilter(work)}
+            >
+              {work}
+            </div>
+          ))}
+        </>
+        {/* )} */}
       </div>
 
       {LoadingPortfolio ? (
@@ -74,22 +84,43 @@ const Work = (props: any) => {
         <>
           {FilterWork && (
             <motion.div
-              animate={AnimateCard}
-              transition={{ duration: 0.5, delayChildren: 0.5 }}
+              animate={Change ? 'closed' : 'open'}
               className={style.app__work_portfolio}
+              transition={{ ease: 'easeInOut', duration: 1, delayChildren: 1 }}
+              initial={{ opacity: 0, y: 100 }}
               whileInView={{
                 opacity: [0, 1],
                 y: [100, 0],
               }}
+              variants={{
+                open: {
+                  opacity: 1,
+                  y: 0,
+                },
+                closed: {
+                  opacity: 0,
+                  y: 100,
+                },
+              }}
             >
               {FilterWork.map((work: any, i: number) => (
                 <WorkItem
+                  work={work}
+                  setIsOpen={setIsOpen}
+                  setPopImage={setPopImage}
+                  index={i}
                 />
               ))}
             </motion.div>
           )}
         </>
       )}
+      <WorkPop
+        isOpen={isOpen}
+        PopImage={PopImage}
+        setPopImage={setPopImage}
+        setIsOpen={setIsOpen}
+      />
     </div>
   );
 };

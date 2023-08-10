@@ -46,20 +46,24 @@ const Footer = () => {
       <h2 className='head-text'>Take a coffee & chat with me</h2>
 
       <div className={style.app__footer_cards}>
-        <div className={style.app__footer_card}>
-          <Image src={images.email} alt='email' />
-          <a href='mailto:ajimuhfauji95@gmail.com' className='p-text'>
+        <a href='mailto:ajimuhfauji95@gmail.com' className='p-text'>
+          <div className={style.app__footer_card}>
+            <Image src={images.email} alt='email' />
             ajimuhfauji95@gmail.com
-          </a>
-        </div>
-        <div className={style.app__footer_card}>
-          <Image src={images.mobile} alt='phone' />
-          <a href='tel:+62 812 9314 0649' className='p-text'>
-            +62 812 9314 0649
-          </a>
-        </div>
+          </div>
+        </a>
+        <a
+          href='https://wa.me/6212345678901'
+          className='p-text'
+          target='_blank'
+        >
+          <div className={style.app__footer_card}>
+            <Image src={images.Whatsapp} alt='phone' />
+            +62 877 1923 2494
+          </div>
+        </a>
       </div>
-      {!isFormSubmitted ? (
+      {/* {!isFormSubmitted ? (
         <div className={`${style.app__footer_form} app__flex`}>
           <div className='app__flex'>
             <input
@@ -98,7 +102,12 @@ const Footer = () => {
         <div>
           <h3 className='head-text'>Thank you for getting in touch!</h3>
         </div>
-      )}
+      )} */}
+
+      <div className='copyright'>
+        <p className='p-text'>@2022 Aji</p>
+        <p className='p-text'>All rights reserved</p>
+      </div>
     </div>
   );
 };
