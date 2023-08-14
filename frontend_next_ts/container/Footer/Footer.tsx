@@ -43,6 +43,7 @@ const Footer = () => {
 
   return (
     <div id='contact' className={`${style.app__footer} app__flex`}>
+      {/* <div className={`${style.app__footer_wrapper}`}> */}
       <h2 className='head-text'>Take a coffee & chat with me</h2>
 
       <div className={style.app__footer_cards}>
@@ -103,11 +104,16 @@ const Footer = () => {
           <h3 className='head-text'>Thank you for getting in touch!</h3>
         </div>
       )} */}
-
-      <div className='copyright'>
-        <p className='p-text'>@2022 Aji</p>
-        <p className='p-text'>All rights reserved</p>
+      <div className={style.app__copyrights}>
+        <p className='bold'>Powered By</p>
+        <div className={style.app__copyrights_skill}>
+          <Image src={images.NextLogo} alt='phone' />
+          <Image src={images.TsLogo} alt='phone' />
+          <Image src={images.SanityLogo} alt='phone' />
+        </div>
+        <p className='p-text'> Made By : Aji Muhammad Fauji, S.Kom @2023</p>
       </div>
+      {/* </div> */}
     </div>
   );
 };

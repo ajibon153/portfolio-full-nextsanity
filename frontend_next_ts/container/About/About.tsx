@@ -14,7 +14,11 @@ const About = () => {
     const query = '*[_type == "abouts"]';
 
     client.fetch(query).then((data: any) => {
-      setAbouts(data);
+      setAbouts(
+        data.sort((a, b) => {
+          return a.index - b.index;
+        })
+      );
       setLoadingAbouts(false);
     });
   }, []);

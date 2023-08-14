@@ -25,6 +25,7 @@ const Skills = (props: any) => {
       }}
       transition={{ duration: 0.5 }}
       className={style.app__skills_list}
+      id='skills'
     >
       {IsLoading ? (
         <LoadingRoller />
@@ -38,6 +39,7 @@ const Skills = (props: any) => {
             animate={{ height: 'auto' }}
             transition={{ duration: 0.4 }}
             exit={{ height: 800 }}
+            // id='skills'
           >
             <motion.div layout id={'listskill'}>
               {Skills.groupSkill &&

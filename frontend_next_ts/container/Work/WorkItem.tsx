@@ -12,14 +12,23 @@ import 'yet-another-react-lightbox/plugins/thumbnails.css';
 
 import style from './Work.module.scss';
 import { LoadingRoller } from '../../components/Loading/Loading';
+
 const WorkItem = (props: any) => {
-  const { work, pop, setIsOpen, index, setPopImage } = props;
+  const { work, pop, setIsOpen, index, setPopImage, Change } = props;
   return (
     <>
-      <div
+      <motion.li
         key={work.title}
         className={`app__flex ${style.app__work_item}`}
-        style={{ boxShadow: pop ? '0 0 25px rgba(0, 0, 0, 0.2)' : '' }}
+        style={{ boxShadow: pop ? '5px 4px 14px rgba(0, 0, 0, 0.2)' : '' }}
+        whileHover={{ scale: 1.1 }}
+        animate={Change ? 'open' : 'closed'}
+        transition={{ ease: 'easeInOut', duration: 0.1 }}
+        initial={{ opacity: 0, y: 100 }}
+        whileInView={{
+          opacity: [0, 1],
+          y: [100, 0],
+        }}
       >
         <div
           className={`app__flex ${style.app__work_img}`}
@@ -93,7 +102,7 @@ const WorkItem = (props: any) => {
             </div>
           )}
         </div>
-      </div>
+      </motion.li>
     </>
   );
 };

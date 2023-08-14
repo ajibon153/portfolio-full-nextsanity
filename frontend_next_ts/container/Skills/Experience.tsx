@@ -5,7 +5,7 @@ import style from './Skills.module.scss';
 import swal from '@sweetalert/with-react';
 import { SkillIcon } from './Skills';
 import { urlFor } from '../../helpers/client';
-import PopExperience from './popExperience';
+// import PopExperience from './popExperience';
 
 // import { capitalizeFirstLetter } from '../../utility/text';
 // import { dateToIndonesia } from '../../utility/dateParse';
@@ -17,19 +17,19 @@ const Experience = (props: any) => {
   // console.log('Skills', Skills);
   console.log('porto Experience', Portfolio);
 
-  const HandlePopUp = (exp: any) => {
-    // console.log('exp', exp);
-
-    swal({
-      buttons: false,
-      content: (
-        <PopExperience Skills={Skills} exp={exp} Portfolio={Portfolio} />
-      ),
-    });
-  };
+  // const HandlePopUp = (exp: any) => {
+  //   // console.log('exp', exp);
+  //   swal({
+  //     buttons: false,
+  //     content: (
+  //       <PopExperience Skills={Skills} exp={exp} Portfolio={Portfolio} />
+  //     ),
+  //   });
+  // };
 
   return (
     <div
+      // id={'experience'}
       className={style.app__skills_exp}
       style={IsLoading ? { alignItems: 'center' } : { marginTop: '2rem' }}
     >

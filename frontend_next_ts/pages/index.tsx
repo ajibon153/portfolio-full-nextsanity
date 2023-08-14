@@ -64,11 +64,17 @@ const Home: NextPage = () => {
         data={sideBarData}
         width={width}
       />
-      <SocialMedia />
+      {/* <SocialMedia /> */}
       <main
         className={styles.app}
         ref={containerRef}
-        style={{ overflowX: sideBar ? 'hidden' : 'scroll' }}
+        style={
+          {
+            // overflowY: sideBar ? 'auto' : 'scroll',
+            // overflow: 'auto',
+            // overflowX: 'auto',
+          }
+        }
       >
         <Navbar />
         <Header />
@@ -85,27 +91,14 @@ const Home: NextPage = () => {
         <Work setPortfolio={setPortfolio} />
         {/* <Testimonial /> */}
         <Footer />
+        {/* <div className='copyright'>
+          <p className='p-text'>@2022 Aji</p>
+          <p className='p-text'>All rights reserved</p>
+        </div> */}
       </main>
-      <NavigationDots />
+      {/* <NavigationDots /> */}
     </>
   );
 };
-
-// export async function getStaticProps() {
-//   const queryClient = new QueryClient();
-
-//   const querySkill = await queryClient.prefetchQuery(['skill'], () =>
-//     getSkillData()
-//   );
-//   // const queryExp = await queryClient.prefetchQuery(['experience'], () =>
-//   //   getSkillData()
-//   // );
-
-//   return {
-//     props: {
-//       Skills: querySkill,
-//     },
-//   };
-// }
 
 export default Home;

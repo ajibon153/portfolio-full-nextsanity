@@ -36,14 +36,16 @@ const Work = (props: any) => {
   }, []);
 
   const handleWorkFilter = async (item: string) => {
-    setActiveFilter(item);
-    setChange(true);
-    setAnimateCard({ y: 100, opacity: 0 });
-    // await setTimeout(() => {
-    setLoadingPortfolio(true);
-    // }, 100);
+    console.log('item', item);
 
-    setTimeout(() => {
+    setActiveFilter(item);
+    setChange(false);
+    setAnimateCard({ y: 100, opacity: 0 });
+    await setTimeout(() => {
+      setLoadingPortfolio(true);
+    }, 500);
+
+    await setTimeout(() => {
       setAnimateCard({ y: 0, opacity: 1 });
       if (item === 'All') {
         setFilterWork(Works);
@@ -52,7 +54,7 @@ const Work = (props: any) => {
       }
       setLoadingPortfolio(false);
       setChange(true);
-    }, 500);
+    }, 700);
   };
 
   return (
@@ -83,35 +85,47 @@ const Work = (props: any) => {
       ) : (
         <>
           {FilterWork && (
-            <motion.div
-              animate={Change ? 'closed' : 'open'}
+            <motion.ul
               className={style.app__work_portfolio}
-              transition={{ ease: 'easeInOut', duration: 1, delayChildren: 1 }}
-              initial={{ opacity: 0, y: 100 }}
-              whileInView={{
-                opacity: [0, 1],
-                y: [100, 0],
-              }}
               variants={{
                 open: {
-                  opacity: 1,
-                  y: 0,
+                  transition: {
+                    staggerChildren: 0.07,
+                    // delayChildren: 0.2
+                  },
                 },
                 closed: {
-                  opacity: 0,
-                  y: 100,
+                  transition: { staggerChildren: 0.05, staggerDirection: -1 },
                 },
               }}
+              // animate={Change ? 'closed' : 'open'}
+              // transition={{ ease: 'easeInOut', duration: 1, delayChildren: 1 }}
+              // initial={{ opacity: 0, y: 100 }}
+              // whileInView={{
+              //   opacity: [0, 1],
+              //   y: [100, 0],
+              // }}
+              // variants={{
+              //   open: {
+              //     opacity: 1,
+              //     y: 0,
+              //   },
+              //   closed: {
+              //     opacity: 0,
+              //     y: 100,
+              //   },
+              // }}
             >
               {FilterWork.map((work: any, i: number) => (
                 <WorkItem
                   work={work}
+                  Change={Change}
                   setIsOpen={setIsOpen}
                   setPopImage={setPopImage}
                   index={i}
                 />
               ))}
-            </motion.div>
+            </motion.ul>
           )}
         </>
       )}

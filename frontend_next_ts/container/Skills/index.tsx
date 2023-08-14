@@ -44,11 +44,10 @@ const Index = (props: any) => {
   }, []);
 
   return (
-    <div id='skills' className='app__flex'>
+    <div className='app__flex'>
       <h2 className='head-text'>Skills & Experience</h2>
 
       <div className={style.app__skills_container}>
-        <Skills IsLoading={IsLoadingSkills} Skills={DataSkills} />
         <Experience
           IsLoading={IsLoadingExperience}
           Experiences={DataExperiences}
@@ -56,6 +55,7 @@ const Index = (props: any) => {
           toggle={toggle}
           Portfolio={Portfolio}
         />
+        <Skills IsLoading={IsLoadingSkills} Skills={DataSkills} />
       </div>
     </div>
   );
@@ -93,6 +93,6 @@ const Index = (props: any) => {
 // export default AppWrap(Skill, 'skills');
 export default AppWrap(
   MotionWrap(Index, 'app__skills'),
-  'skills',
+  'experience',
   'app__whitebg'
 );

@@ -209,6 +209,10 @@ a {
   z-index: 2;
   bottom: 40%;
   right: 0;
+
+  @media screen and (max-width: 1000px) {
+    bottom: 5%;
+  }
 }
 
 .app__navigation_dot {

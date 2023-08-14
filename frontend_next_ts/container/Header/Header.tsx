@@ -35,15 +35,19 @@ const Header = () => {
             <div style={{ marginLeft: 20 }}>
               <p className={`p-text`}> Hello, I am</p>
               <h1 className='head-text'>
-                AJI
+                Aji
                 {/* M. Fauji */}
               </h1>
             </div>
           </div>
 
           <div className={`${style.tag__cmp} app__flex`}>
-            <p className={`p-text`}> Frontend Developer</p>
-            <p className={`p-text`}> React.js & Native</p>
+            <p className={`p-text`}>
+              Experience as a Frontend Developer more than 4 years, focused on
+              Javascript Framework. A good critical thinker, Fast learner, and
+              passionate on graphic design.
+            </p>
+            {/* <p className={`p-text`}> React.js & Native</p> */}
           </div>
         </div>
       </motion.div>
@@ -69,19 +73,19 @@ const Header = () => {
           />
         </motion.div>
       </motion.div>
-      {windowSize.width > 1000 && (
-        <motion.div
-          variants={scaleVariants}
-          whileInView={scaleVariants.whileInView}
-          className={style.app__header_circles}
-        >
-          {[images.redux, images.react, images.git].map((circle, i) => (
-            <div className='circle-cmp app__flex' key={`circle-${i}`}>
-              <Image src={circle} alt='circle' />
-            </div>
-          ))}
-        </motion.div>
-      )}
+      {/* {windowSize.width > 1000 && ( */}
+      <motion.div
+        variants={scaleVariants}
+        whileInView={scaleVariants.whileInView}
+        className={style.app__header_circles}
+      >
+        {[images.redux, images.react, images.git].map((circle, i) => (
+          <div className='circle-cmp app__flex' key={`circle-${i}`}>
+            <Image src={circle} alt='circle' />
+          </div>
+        ))}
+      </motion.div>
+      {/* )} */}
     </div>
   );
 };

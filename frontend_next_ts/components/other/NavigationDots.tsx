@@ -14,6 +14,7 @@ const NavigationDots = (props: any) => {
 
   let homeHeight: number | null = null;
   let aboutHeight: number | null = null;
+  let experienceHeight: number | null = null;
   let skillsHeight: number | null = null;
   let workHeight: number | null = null;
   let contactHeight: number | null = null;
@@ -34,6 +35,8 @@ const NavigationDots = (props: any) => {
     let homeDiv: HTMLElement | number | null = document.getElementById('home');
     let aboutDiv: HTMLElement | number | null =
       document.getElementById('about');
+    let experienceDiv: HTMLElement | number | null =
+      document.getElementById('experience');
     let skillsDiv: HTMLElement | number | null =
       document.getElementById('skills');
     let workDiv: HTMLElement | number | null = document.getElementById('work');
@@ -44,6 +47,7 @@ const NavigationDots = (props: any) => {
 
     homeHeight = homeDiv ? homeDiv.offsetTop : 0;
     aboutHeight = aboutDiv ? aboutDiv.offsetTop - offseter : 0;
+    experienceHeight = experienceDiv ? experienceDiv.offsetTop - offseter : 0;
     skillsHeight = skillsDiv ? skillsDiv.offsetTop - offseter : 0;
     workHeight = workDiv ? workDiv.offsetTop - offseter : 0;
     contactHeight = contactDiv ? contactDiv.offsetTop - offseter : 0;
@@ -75,6 +79,8 @@ const NavigationDots = (props: any) => {
       section = 'work';
     } else if (offsetWindow >= skillsHeight) {
       section = 'skills';
+      // } else if (offsetWindow >= experienceHeight) {
+      //   section = 'experience';
     } else if (offsetWindow >= aboutHeight) {
       section = 'about';
     } else if (offsetWindow >= homeHeight) {

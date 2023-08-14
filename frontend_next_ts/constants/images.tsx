@@ -37,6 +37,10 @@ import skype from '../assets/skype.png';
 import spotify from '../assets/spotify.png';
 
 import Whatsapp from '../assets/whatsapp.png';
+import AjiLogo from '../assets/aji_logo.png';
+import NextLogo from '../assets/nextjs.png';
+import SanityLogo from '../assets/sanity.png';
+import TsLogo from '../assets/ts_logo.png';
 
 export default {
   email,
@@ -73,4 +77,8 @@ export default {
   skype,
   spotify,
   Whatsapp,
+  AjiLogo,
+  NextLogo,
+  SanityLogo,
+  TsLogo,
 };

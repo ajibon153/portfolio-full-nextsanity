@@ -35,9 +35,10 @@ function Sidebar({
               width: '100%',
               padding: 5,
               height: '100vh',
-              zIndex: 10,
+              zIndex: 20,
               overflowY: 'scroll',
             }}
+            onClick={() => setSideBar(!sideBar)}
           >
             <motion.div
               initial={{ x: '110%' }}
@@ -59,26 +60,29 @@ function Sidebar({
                 top: 0,
                 right: 0,
                 width: width < 500 ? '100%' : '85%',
-                // padding: '3%',
-                // paddingRight: 0,
                 height: '100vh',
               }}
+              onClick={(e) => e.stopPropagation()}
             >
               <button
                 onClick={() => setSideBar(!sideBar)}
                 style={{
                   backgroundColor: 'white',
                   color: 'black',
-                  height: 50,
-                  width: 50,
+                  height: 25,
+                  width: 25,
                   display: 'block',
                   margin: 8,
                   borderRadius: '50%',
                   borderColor: 'transparent',
                   zIndex: 20,
                   position: 'fixed',
-                  right: width < 500 ? '8%' : 'unset',
-                  left: width < 500 ? 'unset' : '-35px',
+                  right: width < 500 ? 30 : 'unset',
+                  top: 10,
+                  left: width < 500 ? 'unset' : '-20px',
+                  boxShadow:
+                    width < 500 ? '2px 2px 6px rgba(0,0,0,0.2)' : 'unset',
+                  transform: 'scale(2)',
                 }}
               >
                 &times;
